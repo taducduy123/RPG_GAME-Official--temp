@@ -1,6 +1,8 @@
 package MAP.TILE;
+
 import MAP.Map;
 import CHARACTER.Character;
+
 
 public class DoorTile extends Tile
 {

@@ -1,9 +1,8 @@
 package MAP;
+
 import java.io.*;
 import java.util.*;
-
 import javax.swing.JOptionPane;
-
 import CHARACTER.Boss;
 import CHARACTER.Character;
 import CHARACTER.Monster;
@@ -21,12 +20,13 @@ public class Map  implements Serializable
     private final int maxTileRows = 20;
     private final int maxPossibleTypesOfTile = 5;
     private String path;
+    private int bossPhase;
 
     private Tile[] tile;
     private int[][] tileManager;
     private List<Item> items;
     private List<Monster> monsters;
-    private int bossPhase;
+    
 
 //--------------------------------------------------
 

@@ -5,6 +5,7 @@ import java.util.List;
 import ITEM.Item;
 import MAP.Map;
 
+
 public abstract class Monster extends Character
 {
     protected List<Item> itemsToDrop;

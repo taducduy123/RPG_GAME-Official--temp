@@ -1,8 +1,7 @@
 package CHARACTER;
+
 import java.util.Random;
-
 import javax.swing.JOptionPane;
-
 import ITEM.Armor;
 import ITEM.Item;
 import ITEM.Potion;
@@ -13,7 +12,7 @@ import MAP.Map;
 public class RegularMonster extends Monster
 {
 
-
+    private final String mark = "RM";
 
 
 //-----------------------------------------------------------
@@ -44,7 +43,7 @@ public class RegularMonster extends Monster
     @Override
     public String getMark() 
     {
-        return "RM";
+        return this.mark;
     }
     
 

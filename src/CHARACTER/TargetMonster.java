@@ -4,16 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 import MAP.Map;
 import java.util.Random;
-
 import javax.swing.JOptionPane;
-
 import ITEM.*;
 import MAP.Pair;
+
 
 public class TargetMonster extends Monster
 {
  
-
+    private final String mark = "TM";
 
 
 //-----------------------------------------------------------
@@ -43,7 +42,7 @@ public class TargetMonster extends Monster
     @Override
     public String getMark() 
     {
-        return "TM";
+        return this.mark;
     }
 
 
@@ -170,7 +169,7 @@ public class TargetMonster extends Monster
     }
 
 
- 
+    //Embedded Main
     public static void main(String[] args) 
     {
         TargetMonster monster = new TargetMonster("monster", 0, 0, 0, 0, 0);

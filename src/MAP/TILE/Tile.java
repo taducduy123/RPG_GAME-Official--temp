@@ -1,7 +1,8 @@
 package MAP.TILE;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import CHARACTER.Character;
+
 
 public abstract class Tile implements Serializable
 {

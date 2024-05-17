@@ -1,8 +1,11 @@
 package ITEM;
+
 import CHARACTER.Character;
+
 
 public class Weapon extends Item
 {
+    private final String mark = "wp";
     private int attack;
     private int range;
 
@@ -46,9 +49,12 @@ public class Weapon extends Item
     @Override
     public String getMark()
     {
+        /* 
         //Return 2 first char of Name
         String mark = super.getName().substring(0, 2);
         return mark;
+        */
+        return this.mark;
     }
 
 

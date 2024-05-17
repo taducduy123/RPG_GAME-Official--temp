@@ -1,5 +1,7 @@
 package MAP.TILE;
+
 import CHARACTER.Character;
+
 
 public class FireTile extends Tile
 {

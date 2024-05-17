@@ -1,7 +1,6 @@
 package GameMain;
 
 import java.util.Scanner;
-
 import GAMESTAGE.GameStage;
 
 
@@ -203,14 +202,14 @@ public class GameMain
             if (input.hasNextInt()) {
                 return input.nextInt();
             } else {
-                System.out.print("ERROR: Invalid input! You should enter a number betweent 1 and 3.\nPlease enter again: ");
+                System.out.print("ERROR: Invalid input! You should enter \"A NUMBER\" in SCOPE of Menu.\nPlease enter again: ");
                 input.next();
             }
         }
     }
 
 
-
+ //----------------------------------------------------- Embedded Main ---------------------------------------------------
     public static void main(String[] args) {
         GameMain gmt = new GameMain();
         gmt.Run();

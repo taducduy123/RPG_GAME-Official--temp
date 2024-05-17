@@ -1,10 +1,10 @@
 package GAMESTAGE;
+
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
 import javax.swing.JOptionPane;
-
 import CHARACTER.*;
 import ITEM.*;
 import MAP.*;
@@ -117,88 +117,46 @@ public class GameStage implements Serializable
 
 //--------------------------------------------------- Player Section ---------------------------------------------------
 
-public void playerAction() {
-    System.out.println("\n*************************** What Do? ******************************");
-    System.out.println("1. Move Up");
-    System.out.println("2. Move Down");
-    System.out.println("3. Move Left");
-    System.out.println("4. Move Right");
-    System.out.println("5. No Move");
-    System.out.println("6. Attack");
-    System.out.println("7. Inventory");
-    System.out.println("8. Exit");
-    int choice = getValidatedInput("Enter your choice: ");
-    input.nextLine();                       //consume keyboard buffer
-
-    switch (choice) {
-        case 1:
-            this.player.moveUp(this.map);
-            break;
-        case 2:
-            this.player.moveDown(this.map);
-            break;
-        case 3:
-            this.player.moveLeft(this.map);
-            break;
-        case 4:
-            this.player.moveRight(this.map);
-            break;
-        case 5:
-            break;
-        case 6:
-            playerAttack();
-            break;
-        case 7:
-            playerInvent();
-            break;
-        case 8:
-            this.isExit = true;
-            break;
-        default:
-            System.out.println("Invalid choice please choose again!");
-            playerAction();
-            break;
-    }
-}
-
-
-
-    public void playerMove(){
-        int choice;
-        System.out.println("\n------------------------------------------------------\n");
+    public void playerAction() {
+        System.out.println("\n*************************** What Do? ******************************");
         System.out.println("1. Move Up");
         System.out.println("2. Move Down");
         System.out.println("3. Move Left");
         System.out.println("4. Move Right");
         System.out.println("5. No Move");
-        System.out.println("6. Back to menu");
-        System.out.print("Enter your choice: ");
-        choice = input.nextInt();
-        input.nextLine();                           //consume keyboard buffer           
+        System.out.println("6. Attack");
+        System.out.println("7. Inventory");
+        System.out.println("8. Exit");
+        int choice = getValidatedInput("Enter your choice: ");
+        input.nextLine();                       //consume keyboard buffer
+
         switch (choice) {
             case 1:
                 this.player.moveUp(this.map);
                 break;
-            
             case 2:
                 this.player.moveDown(this.map);
                 break;
-
             case 3:
                 this.player.moveLeft(this.map);
                 break;
-            
             case 4:
                 this.player.moveRight(this.map);
                 break;
-            
             case 5:
                 break;
-            
             case 6:
-                playerAction();
+                playerAttack();
+                break;
+            case 7:
+                playerInvent();
+                break;
+            case 8:
+                this.isExit = true;
                 break;
             default:
+                System.out.println("Invalid choice! You should enter a number between 1 and 8!");
+                playerAction();
                 break;
         }
     }
@@ -215,38 +173,62 @@ public void playerAction() {
         //Print all monsters in range so that player can pick one to attack
         if(targets.size() == 0)
         {
-            System.out.println(">> No monster in range to attack! (Press [Enter] to continue)");
+            System.out.println("\n>> No monster in range to attack! (Press [Enter] to continue)");
             input.nextLine();
+            System.out.println("-------------------------------------------------------------------------------------------------------\n");
         }
         else
         {
-            System.out.printf("|%10s | %20s | %10s |\n", "No.",
-                                                        "Name",
-                                                        "HP");
+            //Sort by current HP
+            List<Monster> sortedMons = targets.stream()
+                                            .sorted((m1, m2) ->{
+                                                return m1.getHP() - m2.getHP();
+                                            })
+                                            .toList();
+
+            System.out.println("\n-------------------> Monsters in Your Range <----------------------");
+            System.out.printf("| %-3s | %-25s | %-16s | %-10s |\n", "No.",
+                                                                        "          Name",
+                                                                        "       Type",
+                                                                        "    HP");
+            System.out.println("-------------------------------------------------------------------");
+            String typeMonst = "";
             for(int i = 0; i < targets.size(); i++){
-                System.out.printf("|%10s | %20s | %10s |\n", i + 1, 
-                        targets.get(i).getName() + "(" + targets.get(i).getMark() + ")",
-                        targets.get(i).getHP() + "/" + targets.get(i).getMaxHp());
+
+                //Classify monsters
+                if(sortedMons.get(i) instanceof RegularMonster)
+                    typeMonst = "Regular Monster";
+                else if(sortedMons.get(i) instanceof TargetMonster)
+                    typeMonst = "Target Monster";
+                else if(sortedMons.get(i) instanceof Boss)
+                    typeMonst = "Boss";
+
+                System.out.printf("| %-3s | %-25s | %-16s | %-10s |\n", " " + String.valueOf(i + 1), 
+                                                                            sortedMons.get(i).getName(),
+                                                                                typeMonst,
+                                                                                sortedMons.get(i).getHP() + "/" + sortedMons.get(i).getMaxHp());
             }
+            System.out.println("-------------------------------------------------------------------");
+
             int choice;
-            System.out.print("Choose a number (0: Exit || 1 - " + targets.size() + ") to attack monster: ");
-            choice = input.nextInt();
+            System.out.print("Enter a number (0: Exit || 1 - " + targets.size() + ") to attack monster: ");
+            choice = getValidatedInput();
             input.nextLine();                   //consume keyboard buffer
-            
-            if(choice > 0){
+            System.out.println("\n-------------------------------------------------------------------------------------------------------\n");
+            if(choice > 0 && choice <= targets.size()){
                 targets.get(choice - 1).takeDamage(this.player.getAttack());
             }
-            else if(choice < 0)
+            else if(choice < 0 || choice > targets.size())
                 System.out.println("ERROR: Invalid choice");
             else{           
-                System.out.println("\n------------------------------------------------------\n");
+                //System.out.println("\n-------------------------------------------------------------------------------------------------------\n");
                 showGraphic();
                 playerAction();
             }
         }
     }
 
-    
+      
     public void playerInvent() {
         if(this.invent.isEmpty()) {
             System.out.println("\n>> Empty inventory \n");
@@ -281,7 +263,7 @@ public void playerAction() {
         boolean status1 = true;
         boolean shouldContinue = true;
 
-        System.out.println("\n-------------------------------------------------------------\n");
+        System.out.println("\n---------------------------------------------------------------------------------------------\n");
         if(this.invent.getItem(choice - 1) instanceof Weapon)
             System.out.println((this.invent.getItem(choice - 1)).toString());
         else if(this.invent.getItem(choice - 1) instanceof Armor)
@@ -331,7 +313,7 @@ public void playerAction() {
             this.invent.removeItem(choice - 1);
         }
         System.out.println("\n>> Equip successfully");
-        System.out.println("\n-------------------------------------------------------------");
+        System.out.println("\n---------------------------------------------------------------------------------------------");
      
 
         if(this.invent.isEmpty()){
@@ -373,7 +355,7 @@ public void playerAction() {
         }
         else if(invent.getItem(choice - 1) instanceof Potion)
             System.out.println("\n>> Unequip fail! You cannot unequip Potion!!!");
-        System.out.println("\n-------------------------------------------------------------");
+        System.out.println("\n---------------------------------------------------------------------------------------------");
         this.invent.displayInventory();
         this.player.showState();
     }
@@ -389,7 +371,7 @@ public void playerAction() {
             this.player.unequipArmor();
         this.invent.removeItem(choice - 1);
         System.out.println("\n>> Remove successfully");
-        System.out.println("\n-------------------------------------------------------------");
+        System.out.println("\n---------------------------------------------------------------------------------------------");
 
         if(this.invent.isEmpty()){
             System.out.println("\n>> Empty Inventory\n");
@@ -407,14 +389,25 @@ public void playerAction() {
     }
  
     
-
     private int getValidatedInput(String prompt) {
         while (true) {
             System.out.print(prompt);
             if (input.hasNextInt()) {
                 return input.nextInt();
             } else {
-                System.out.println("ERROR: Invalid Input! Please enter a number between 1 and 3.");
+                System.out.println("ERROR: Invalid Input! Please enter \"A NUMBER\" in SCOPE of Menu.\nPlease enter again:");
+                input.next();
+            }
+        }
+    }
+
+
+    private int getValidatedInput() {
+        while (true) {
+            if (input.hasNextInt()) {
+                return input.nextInt();
+            } else {
+                System.out.println("ERROR: Invalid Input! Please enter \"A NUMBER\" in SCOPE of Menu.\nPlease enter again:");
                 input.next();
             }
         }
@@ -464,7 +457,7 @@ public void playerAction() {
     }
 
 
-//---------------------------------------------------- work with files -----------------------------------------
+//-------------------------------------------- Save Game for the next time playing -----------------------------------------
 
     public void save(String filename) 
     {
@@ -503,18 +496,10 @@ public void playerAction() {
 
 
 
-//---------------------------------------------------- Embedded Main
+//---------------------------------------------------- Embedded Main ---------------------------------
     public static void main(String[] args) 
     {
-        GameStage g = new GameStage();
-        g.setExitState(true);
-
-        g.save("Test.ser");
-
-
-        GameStage gLoad = GameStage.load("Test.ser");
-
-        System.out.println(gLoad.isExit());
+    
 
     }
 }

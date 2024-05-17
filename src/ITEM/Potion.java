@@ -1,9 +1,11 @@
 package ITEM;
+
 import CHARACTER.Character;
 
 
 public class Potion extends Item
 {
+    private final String mark = "po";
     private int HPtoHeal;
 
 //--------------------------------------------------
@@ -26,9 +28,12 @@ public class Potion extends Item
     @Override
     public String getMark()
     {       
+        /*
         //Return 2 first char of Name
         String mark = super.getName().substring(0, 2);
         return mark;
+        */
+        return this.mark;
     }
 
 
@@ -50,7 +55,7 @@ public class Potion extends Item
     public String toString()
     {   
         //name [HP to Heal: ]
-        String str =  super.getName() + " [HP to Heal: " + this.HPtoHeal  + "]";                              
+        String str =  super.getName() + " [HP Recovery: " + this.HPtoHeal  + "]";                              
         return str;
     }
 

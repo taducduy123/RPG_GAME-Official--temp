@@ -1,6 +1,6 @@
 package ITEM;
-import java.io.Serializable;
 
+import java.io.Serializable;
 import CHARACTER.Character;
 
 

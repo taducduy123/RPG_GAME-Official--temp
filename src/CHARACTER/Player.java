@@ -3,8 +3,10 @@ package CHARACTER;
 import ITEM.*;
 import MAP.Map;
 
+
 public class Player extends Character
 {
+    private final String mark = "X";
     private Weapon weapon  = null;
     private Armor armor = null;
 
@@ -64,7 +66,7 @@ public class Player extends Character
 
     @Override
     public String getMark()
-    {return "X";}
+    {return this.mark;}
 
 
 //------------------------------------- Show State --------------------------------------------
@@ -78,6 +80,7 @@ public class Player extends Character
         System.out.println("Range: " + this.getRange());
         System.out.println("Weapon: " + (weapon != null ? weapon.getName() : "None"));
         System.out.println("Armor: " + (armor != null ? armor.getName() : "None"));
+        System.out.println("Position: (" + this.getX() + ", " + this.getY() + ")");
     }
 
 //----------------------------------- Check Collision with Monster -------------------------------

@@ -54,19 +54,27 @@ public class Inventory implements Serializable
     //Display
     public void displayInventory()
     {
-        System.out.println("\n------------------------ My Inventory -----------------------\n");
-        System.out.printf("|%10s | %20s | %10s | %10s|\n", "No.",
-                                                                        "Name",
-                                                                        "Type",
-                                                                        "State");
+        List<Item> sortedInven = this.items.stream()
+                                        .sorted((i1, i2) ->{
+                                                return i1.getType() - i2.getType();
+                                        })
+                                        .toList();
 
+        System.out.println("\n--------------------------------------------> My Inventory <-------------------------------------------");
+        System.out.printf("| %-3s | %-25s | %-4s | %-50s | %-5s |\n", "No.",
+                                                                        "           Name",
+                                                                        "Type",
+                                                                        "                    Item Stats",
+                                                                        "State");
+        System.out.println("-------------------------------------------------------------------------------------------------------");
         for(int i = 0; i < this.size(); i++){
-            System.out.printf("|%10d | %20s | %10d | %10s|\n", i + 1,
-                                                                    this.items.get(i).getName(),
-                                                                    this.items.get(i).getType(),
-                                                                    this.items.get(i).getInUse() == true ? "V" : "");
+            System.out.printf("| %-3S | %-25s | %-4s | %-50s | %-5s |\n", " " + String.valueOf(i + 1),
+                                                                            sortedInven.get(i).getName(),
+                                                                            " " + String.valueOf(sortedInven.get(i).getType()),
+                                                                            sortedInven.get(i).toString(),
+                                                                            "  " + (sortedInven.get(i).getInUse() == true ? "V" : ""));
         }
-       
+        System.out.println("-------------------------------------------------------------------------------------------------------");
     }       
     
     

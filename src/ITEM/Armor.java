@@ -1,9 +1,11 @@
 package ITEM;
+
 import CHARACTER.Character;
 
 
 public class Armor extends Item
 {
+    private final String mark = "ar";
     private int defense;
     private int HP;
     
@@ -28,10 +30,13 @@ public class Armor extends Item
 
     @Override
     public String getMark()
-    {       
+    {      
+        /*  
         //Return 2 first char of Name
         String mark = super.getName().substring(0, 2);
         return mark;
+        */
+        return this.mark;
     }
 
     //Equal
@@ -50,8 +55,6 @@ public class Armor extends Item
     }
 
 
-
-   
     @Override
     public void applyEffectTo(Character obj)
     {
@@ -77,12 +80,10 @@ public class Armor extends Item
     }
 
 
-
-    public static void main(String[] args) {
-        Armor a ;
-        Armor b = new Armor(null);
-
-        System.out.println(b);
+    //Embedded Main
+    public static void main(String[] args) 
+    {
+       
     }
 }
 

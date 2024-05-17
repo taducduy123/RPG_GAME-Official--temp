@@ -1,8 +1,8 @@
 package CHARACTER;
 
 import java.io.Serializable;
-
 import MAP.Map;
+
 
 public abstract class Character implements Serializable
 {
