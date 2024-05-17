@@ -54,7 +54,7 @@ public class Inventory implements Serializable
     //Display
     public void displayInventory()
     {
-        
+        System.out.println("\n------------------------ My Inventory -----------------------\n");
         System.out.printf("|%10s | %20s | %10s | %10s|\n", "No.",
                                                                         "Name",
                                                                         "Type",

@@ -6,7 +6,6 @@ import GAMESTAGE.GameStage;
 
 
 
-
 public class GameMain 
 {
     private GameStage stage;
@@ -124,19 +123,19 @@ public class GameMain
                 {
                     stage.playerAction();
                     stage.updateMap();
-                    //1if(!this.stage.isPlayeratDoor())       
+                    //if(!this.stage.isPlayeratDoor())       
                         stage.showGraphic();
                     stage.save(fileName);
                 }
 
                 if(this.stage.isPlayeratDoor())
                 {
-                    System.out.println("Congratulations!! You Passed Stage # "+ this.stage.getStageNo() + "! (Press [Enter] to continue)");
+                    System.out.println("\n>> Congratulations!! You Passed Stage # "+ this.stage.getStageNo() + "! (Press [Enter] to continue)");
                     input.nextLine();
                     this.stage.resetPlayerWhenNextStage();
                     this.stage.nextmap();
                     this.startStage();
-                    stage.save(fileName);
+                    //stage.save(fileName);
                 }
                 
             }
@@ -144,13 +143,12 @@ public class GameMain
             {
                 if(this.stage.getCurrentMapNo() != this.maxMapNum)
                 {   
-                    System.out.println("WARNING: You Have Defeated The Boss!! However, you feel chill down your spine! (Press [Enter] to continue)");
+                    System.out.println("\nWARNING: You Have Defeated The Boss!! However, you feel chill down your spine! (Press [Enter] to continue)");
                     input.nextLine();
-                    System.out.println("WARNING: The Boss Was Awoken!! Let's prepare to make fight! (Press [Enter] to continue)");
+                    System.out.println("\nWARNING: The Boss Was Awoken!! Let's prepare to make fight! (Press [Enter] to continue)");
                     input.nextLine();
                     this.stage.nextmap();
                     this.startStage();
-                    stage.save(fileName);
                 }
                 else
                 {
@@ -165,14 +163,14 @@ public class GameMain
                     if(this.stage.isPlayeratDoor())
                     {
                         int choice =0;
-                        System.out.println("Congratulations!! You Win Entire Game! (Press [Enter] to continue):");
+                        System.out.println("\n>> Congratulations!! You Win Entire Game! (Press [Enter] to continue):");
                         input.nextLine();
-                        stage.save(fileName);
-                        System.out.println("Do you want to carry on the items you achived and go on another adventure? (0:No | 1:Yes)");
+                        //stage.save(fileName);
+                        System.out.println("\n>> Do you want to carry on the items you achived and go on another adventure? (0:No | 1:Yes)");
                         choice = input.nextInt();           //consume keyboard buffer
                         switch (choice) {
                             case 0:
-                                System.out.println("You will now be sent back to Home Menu (Press [Enter] to continue)");
+                                System.out.println("\n>> You will now be sent back to Home Menu (Press [Enter] to continue)");
                                 input.nextLine();
                                 break;
                             case 1:
@@ -194,7 +192,8 @@ public class GameMain
             stage.resetstage();
             stage.resetPlayerWhenDied();
             stage.delete(fileName);
-            System.out.println(">> You Died!! Let's Start At Beginning! (Press [Enter] to continue)" );
+            System.out.println("0");
+            System.out.println("\n>> You Died!! Let's Start At Beginning! (Press [Enter] to continue)");
             input.nextLine();
         }     
     }

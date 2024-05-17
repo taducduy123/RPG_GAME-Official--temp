@@ -248,7 +248,6 @@ public void playerAction() {
 
     
     public void playerInvent() {
-        System.out.println("\n------------------------ My Inventory -----------------------\n");
         if(this.invent.isEmpty()) {
             System.out.println("\n>> Empty inventory \n");
             System.out.println("Press [Enter] to continue");
@@ -257,6 +256,7 @@ public void playerAction() {
             this.invent.displayInventory();
             this.player.showState();
             boolean status = true;
+            boolean status1 = true;
             do {
                 int choice = getValidatedInput("Enter a number to show item (Exit: 0 | Range: 1 - " + this.invent.size() + "): ");
                 input.nextLine();                        //consume keyboard buffer
@@ -264,18 +264,23 @@ public void playerAction() {
                     this.showGraphic();
                     status = false;
                 } else if(0 < choice && choice <= this.invent.size()){
-                    handleInventoryItem(choice);
+                    status1 = handleInventoryItem(choice);
                 } else {
                     System.out.println("ERROR: Invalid choice");
                 }
-            } while(status == true);
+            } while(status == true && status1 == true);
+
+            if(status1 == false)
+                showGraphic();
             playerAction();
         }
     }
  
     
-    private void handleInventoryItem(int choice) {
+    private boolean handleInventoryItem(int choice) {
         boolean status1 = true;
+        boolean shouldContinue = true;
+
         System.out.println("\n-------------------------------------------------------------\n");
         if(this.invent.getItem(choice - 1) instanceof Weapon)
             System.out.println((this.invent.getItem(choice - 1)).toString());
@@ -291,7 +296,7 @@ public void playerAction() {
                                             "Enter your choice: ");
             input.nextLine();                           //consume keyboard buffer
             if(choice1 == 1){
-                useItem(choice);
+                shouldContinue = useItem(choice);
                 status1 = false;
             }
             else if(choice1 == 2){
@@ -299,7 +304,7 @@ public void playerAction() {
                 status1 = false;
             }
             else if(choice1 == 3){
-                removeItem(choice);
+                shouldContinue = removeItem(choice);
                 status1 = false;
             } else if(choice1 == 4){
                 playerInvent();
@@ -308,10 +313,15 @@ public void playerAction() {
                 System.out.println("ERROR: Invalid choice");
             }
         } while (status1 == true);
+
+        return shouldContinue;
     }
  
     
-    private void useItem(int choice) {
+    private boolean useItem(int choice) {
+
+        boolean shouldContinue = true;
+
         if(this.invent.getItem(choice - 1) instanceof Weapon)
             this.player.equipWeapon(this.invent.getItem(choice - 1));
         else if (this.invent.getItem(choice - 1) instanceof Armor)
@@ -322,8 +332,21 @@ public void playerAction() {
         }
         System.out.println("\n>> Equip successfully");
         System.out.println("\n-------------------------------------------------------------");
-        this.invent.displayInventory();
-        this.player.showState();
+     
+
+        if(this.invent.isEmpty()){
+            System.out.println("\n>> Empty Inventory\n");
+            System.out.println("Press [Enter] to continue");
+            input.nextLine();
+            showGraphic();
+            playerAction();
+            shouldContinue = false;
+        }
+        else{
+            this.invent.displayInventory();
+            this.player.showState();
+        }
+        return shouldContinue;
     }
   
     
@@ -356,7 +379,10 @@ public void playerAction() {
     }
   
     
-    private void removeItem(int choice) {
+    private boolean removeItem(int choice) {
+
+        boolean shouldContinue = true;
+
         if(this.invent.getItem(choice - 1) instanceof Weapon && this.invent.getItem(choice - 1).getInUse() == true)
             this.player.unequipWeapon();
         else if(this.invent.getItem(choice - 1) instanceof Armor && this.invent.getItem(choice - 1).getInUse() == true)
@@ -371,11 +397,13 @@ public void playerAction() {
             input.nextLine();
             showGraphic();
             playerAction();
+            shouldContinue = false;
         }
         else{
             this.invent.displayInventory();
             this.player.showState();
         }
+        return shouldContinue;
     }
  
     
