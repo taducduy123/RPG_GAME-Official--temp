@@ -26,9 +26,14 @@ public class Inventory implements Serializable
     }
 
     public void removeItem(int index){
-        if(this.items.size() < 0)
-            JOptionPane.showMessageDialog(null, "Can't remove item!!!");
-        this.items.remove(index);
+        if(this.items.size() == 0)
+            JOptionPane.showMessageDialog(null, "Cannot remove item!!!");
+        else{
+            if(0 <= index && index < this.items.size())
+                this.items.remove(index);
+            else 
+                System.out.println("Invalid index to remove!");
+        }
     }
 
     public Item getItem(int index){
@@ -54,12 +59,11 @@ public class Inventory implements Serializable
     //Display
     public void displayInventory()
     {
-        List<Item> sortedInven = this.items.stream()
-                                        .sorted((i1, i2) ->{
-                                                return i1.getType() - i2.getType();
-                                        })
-                                        .toList();
-
+        
+        //Sort current item list by TYPE
+        this.items.sort((i1, i2) ->{return i1.getType() - i2.getType();});
+                                        
+        //Now let's display
         System.out.println("\n--------------------------------------------> My Inventory <-------------------------------------------");
         System.out.printf("| %-3s | %-25s | %-4s | %-50s | %-5s |\n", "No.",
                                                                         "           Name",
@@ -69,10 +73,10 @@ public class Inventory implements Serializable
         System.out.println("-------------------------------------------------------------------------------------------------------");
         for(int i = 0; i < this.size(); i++){
             System.out.printf("| %-3S | %-25s | %-4s | %-50s | %-5s |\n", " " + String.valueOf(i + 1),
-                                                                            sortedInven.get(i).getName(),
-                                                                            " " + String.valueOf(sortedInven.get(i).getType()),
-                                                                            sortedInven.get(i).toString(),
-                                                                            "  " + (sortedInven.get(i).getInUse() == true ? "V" : ""));
+                                                                            this.items.get(i).getName(),
+                                                                            " " + String.valueOf(this.items.get(i).getType()),
+                                                                            this.items.get(i).toString(),
+                                                                            "  " + (this.items.get(i).getInUse() == true ? "V" : ""));
         }
         System.out.println("-------------------------------------------------------------------------------------------------------");
     }       
@@ -80,15 +84,22 @@ public class Inventory implements Serializable
     
     //Embedded Main 
     public static void main(String[] args) {
+
+        //List<Item> i = new ArrayList<>(5);
         Inventory i = new Inventory(5);
         i.addItem(new Weapon("w1", 0, 0, 0, 0));
         i.addItem(new Weapon("w2", 0, 0, 0, 0));
         i.addItem(new Armor("a1", 0, 0, 0, 0));
         i.addItem(new Weapon("w3", 0, 0, 0, 0));
         i.addItem(new Armor("a2", 0, 0, 0, 0));
-        //i.displayInventory();
+        
+        i.displayInventory();
 
+        System.out.println(i.getItem(2).toString());
+        i.removeItem(2);
+        i.displayInventory();
        
-        //i.displayInventory();
+
+
     }
 }

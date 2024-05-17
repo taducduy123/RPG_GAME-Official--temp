@@ -155,7 +155,7 @@ public class GameStage implements Serializable
                 this.isExit = true;
                 break;
             default:
-                System.out.println("Invalid choice! You should enter a number between 1 and 8!");
+                System.out.println("\n>> ERROR: Invalid Choice! You should enter a number between 1 and 8!\n");
                 playerAction();
                 break;
         }
@@ -164,7 +164,7 @@ public class GameStage implements Serializable
 
     public void playerAttack(){ // Reminder: need to improve this function (too complex and should have print out in menu if avalible) || solution: None
         //Find all monsters in range of player
-        ArrayList<Monster> targets = new ArrayList<Monster>();
+        List<Monster> targets = new ArrayList<Monster>();
         for(int i = 0; i < this.map.numberOfMonsters(); i++){
             if(player.collideMonster(this.map.getMonsterAtIndex(i)))
                 targets.add(this.map.getMonsterAtIndex(i));
@@ -179,13 +179,11 @@ public class GameStage implements Serializable
         }
         else
         {
-            //Sort by current HP
-            List<Monster> sortedMons = targets.stream()
-                                            .sorted((m1, m2) ->{
-                                                return m1.getHP() - m2.getHP();
-                                            })
-                                            .toList();
-
+            
+            //Sort by current list of targets by HP (remember do not use Stream here)
+            targets.sort((m1, m2) ->{return m1.getHP() - m2.getHP();});
+                                            
+            //Now, Let's display
             System.out.println("\n-------------------> Monsters in Your Range <----------------------");
             System.out.printf("| %-3s | %-25s | %-16s | %-10s |\n", "No.",
                                                                         "          Name",
@@ -196,17 +194,17 @@ public class GameStage implements Serializable
             for(int i = 0; i < targets.size(); i++){
 
                 //Classify monsters
-                if(sortedMons.get(i) instanceof RegularMonster)
+                if(targets.get(i) instanceof RegularMonster)
                     typeMonst = "Regular Monster";
-                else if(sortedMons.get(i) instanceof TargetMonster)
+                else if(targets.get(i) instanceof TargetMonster)
                     typeMonst = "Target Monster";
-                else if(sortedMons.get(i) instanceof Boss)
+                else if(targets.get(i) instanceof Boss)
                     typeMonst = "Boss";
 
                 System.out.printf("| %-3s | %-25s | %-16s | %-10s |\n", " " + String.valueOf(i + 1), 
-                                                                            sortedMons.get(i).getName(),
-                                                                                typeMonst,
-                                                                                sortedMons.get(i).getHP() + "/" + sortedMons.get(i).getMaxHp());
+                                                                            targets.get(i).getName(),
+                                                                            typeMonst,
+                                                                            targets.get(i).getHP() + "/" + targets.get(i).getMaxHp());
             }
             System.out.println("-------------------------------------------------------------------");
 
@@ -219,7 +217,7 @@ public class GameStage implements Serializable
                 targets.get(choice - 1).takeDamage(this.player.getAttack());
             }
             else if(choice < 0 || choice > targets.size())
-                System.out.println("ERROR: Invalid choice");
+                System.out.println("\n>> ERROR: Invalid Choice! Please enter again.\n");
             else{           
                 //System.out.println("\n-------------------------------------------------------------------------------------------------------\n");
                 showGraphic();
@@ -234,6 +232,7 @@ public class GameStage implements Serializable
             System.out.println("\n>> Empty inventory \n");
             System.out.println("Press [Enter] to continue");
             input.nextLine();
+            System.out.println("---------------------------------------------------------------------------------------------\n");
         } else {
             this.invent.displayInventory();
             this.player.showState();
@@ -248,7 +247,7 @@ public class GameStage implements Serializable
                 } else if(0 < choice && choice <= this.invent.size()){
                     status1 = handleInventoryItem(choice);
                 } else {
-                    System.out.println("ERROR: Invalid choice");
+                    System.out.println("\n>> ERROR: Invalid Choice! Please enter again.\n");
                 }
             } while(status == true && status1 == true);
 
@@ -292,7 +291,7 @@ public class GameStage implements Serializable
                 playerInvent();
                 status1 = false;
             } else {
-                System.out.println("ERROR: Invalid choice");
+                System.out.println("\n>> ERROR: Invalid Choice! Please enter again.\n");
             }
         } while (status1 == true);
 
@@ -320,6 +319,7 @@ public class GameStage implements Serializable
             System.out.println("\n>> Empty Inventory\n");
             System.out.println("Press [Enter] to continue");
             input.nextLine();
+            System.out.println("---------------------------------------------------------------------------------------------\n");
             showGraphic();
             playerAction();
             shouldContinue = false;
@@ -377,6 +377,7 @@ public class GameStage implements Serializable
             System.out.println("\n>> Empty Inventory\n");
             System.out.println("Press [Enter] to continue");
             input.nextLine();
+            System.out.println("---------------------------------------------------------------------------------------------\n");
             showGraphic();
             playerAction();
             shouldContinue = false;

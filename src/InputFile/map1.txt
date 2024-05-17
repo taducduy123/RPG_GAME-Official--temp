@@ -28,5 +28,8 @@ Potion,Orange,2,1,1
 END_ITEM
 RegularMonster,Orc,50,5,0,10,10
 TargetMonster,Orc1,50,7,0,11,10
+TargetMonster,Orc2,70,7,0,11,11
+TargetMonster,Orc3,90,7,0,12,12
+TargetMonster,Orc4,30,7,0,13,13
 END_MONSTER
 0

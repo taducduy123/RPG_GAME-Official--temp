@@ -52,7 +52,7 @@ public class GameMain
                         this.stage = GameStage.load(fileName);
                         if(this.stage == null)
                         {
-                            System.out.println("Not Found Current Game Data!");
+                            System.out.println(">> Not Found Current Game Data!");
                             break;
                         }
                         this.stage.setExitState(false);
@@ -62,11 +62,12 @@ public class GameMain
                 case 3:
 
                         System.out.println("See you next time!");
+                        System.exit(0);
                         input.close();
                         break;
 
                 default:
-                        System.out.println("ERROR: Invalid Choice! You should enter a number betweent 1 and 3.");
+                        System.out.println("\n>> ERROR: Invalid Choice! You should enter a number betweent 1 and 3.\n");
                         break;
 
             }
