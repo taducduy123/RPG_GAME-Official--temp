@@ -45,12 +45,9 @@ public class Boss extends Monster
     @Override
     public void setItemToDrop() 
     {
-        this.itemsToDrop.add(new Weapon("Glory Sword", 70, 3, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Weapon("Shadowstrike Blade", 65, 3, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Weapon("Zues Golden Archery", 50, 6, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Armor("Dragon Armor", 70, 70, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Armor("Titan Shield", 60, 60, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Armor("Silver Shield", 50, 50, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Weapon("Glory Sword", 60, 3, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Armor("Sunfire Aegis", 10, 60, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Potion("Health Potion", 30, this.getX(), this.getY()));
     }
 
     @Override
