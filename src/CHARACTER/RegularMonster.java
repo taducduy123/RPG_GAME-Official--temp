@@ -50,10 +50,10 @@ public class RegularMonster extends Monster
     @Override
     public void setItemToDrop() 
     {
-        this.itemsToDrop.add(new Weapon("Lethal Axe", 10, 1, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Weapon("Golden Sword", 20, 1, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Armor("Shield", 10, 10, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Potion("Apple Potion", 10, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Armor("Giants Belt ", 5, 10, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Armor("Glacial Buckler", 10, 10, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Weapon("Black Cleaver", 30, 1, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Potion("Apple Potion", 30, this.getX(), this.getY()));
     }
 
 
