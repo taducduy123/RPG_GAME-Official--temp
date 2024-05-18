@@ -20,6 +20,6 @@
 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 4
 END_MAP
 END_ITEM
-Boss,Dragon,150,60,30,7,10,10,True
+Boss,Elder Dragon,150,60,30,7,10,10,True
 END_MONSTER
 2
