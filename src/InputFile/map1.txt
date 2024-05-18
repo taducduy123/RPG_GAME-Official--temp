@@ -23,7 +23,7 @@ Weapon,Doran's Blade,15,2,19,0
 Armor,Doran's Sheild,5,15,2,19
 Potion,Health Potion,20,19,1
 END_ITEM
-RegularMonster,Orc,60,20,10,16,11
-RegularMonster,Orc1,60,20,10,2,12
+RegularMonster,Crimson Raptor,60,20,10,16,11
+RegularMonster,Ancient Krug,60,20,10,2,12
 END_MONSTER
 0
