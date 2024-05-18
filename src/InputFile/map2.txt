@@ -21,8 +21,8 @@
 END_MAP
 Weapon,Last Whisper,40,4,8,19
 END_ITEM
-TargetMonster,Orc,50,30,20,7,5
-TargetMonster,Orc,50,30,20,16,8
-RegularMonster,Orc1,80,30,20,5,17
+TargetMonster,Greater Murk Wolf,50,30,20,7,5
+TargetMonster,Red Brambleback,50,30,20,16,8
+RegularMonster,Blue Sentinel,80,30,20,5,17
 END_MONSTER
 0
