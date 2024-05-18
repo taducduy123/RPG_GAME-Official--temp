@@ -49,13 +49,10 @@ public class TargetMonster extends Monster
     @Override
     public void setItemToDrop() 
     {
-        this.itemsToDrop.add(new Armor("Shield", 10, 10, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Armor("Shield", 10, 10, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Potion("Big Potion", 40, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Potion("Small Potion", 10, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Potion("Small Potion", 10, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Potion("Small Potion", 10, this.getX(), this.getY()));
-        this.itemsToDrop.add(new Potion("Small Potion", 10, this.getX(), this.getY()));
+       this.itemsToDrop.add(new Weapon("Kircheis Shard ", 20, 2, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Weapon("Serrated Dirk", 25, 1, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Potion("Small Potion", 30, this.getX(), this.getY()));
+        this.itemsToDrop.add(new Armor("JakSho", 10, 30, this.getX(), this.getY()));
     }
 
 
