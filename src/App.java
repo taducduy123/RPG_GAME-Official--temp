@@ -1,5 +1,8 @@
+import GameMain.GameMain;
+
 public class App {
     public static void main(String[] args) throws Exception {
-        System.out.println("Hello, World!");
+         GameMain gm = new GameMain();
+         gm.Run();
     }
 }
