@@ -21,7 +21,7 @@ public class Player extends Character
     //Constructor #2: Basic properties of player is set by default
     public Player()
     {
-        super("Hero", 300, 50, 0, 5, 0, 0);
+        super("Hero", 100, 10, 10, 1, 0, 0);
     }
 
     //Copy Constructor 
