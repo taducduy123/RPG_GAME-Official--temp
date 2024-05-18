@@ -290,6 +290,7 @@ public class GameStage implements Serializable
             } else if(choice1 == 4){
                 playerInvent();
                 status1 = false;
+                shouldContinue = false;
             } else {
                 System.out.println("\n>> ERROR: Invalid Choice! Please enter again.\n");
             }
